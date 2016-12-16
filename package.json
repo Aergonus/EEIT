@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	start": "node app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Spellchaser/EEIT/issues"
   },
-  "homepage": "https://github.com/Spellchaser/EEIT#readme"
+  "homepage": "https://github.com/Spellchaser/EEIT#readme",
+  "dependencies": {
+    "mysql": "^2.12.0"
+  }
 }
