@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Spellchaser/EEIT#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.0",
     "mysql": "^2.12.0"
   }
 }

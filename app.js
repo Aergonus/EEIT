@@ -1,18 +1,55 @@
-var env        = process.env.NODE_ENV || 'admin';
-var config     = require('./config')[env];
-
 var mysql      = require('mysql');
-var connection = mysql.createConnection(config);
+var env        = process.env.NODE_ENV || 'dev';
+var connection = require('./config')[env];
+var pool       = mysql.createPool(connection);
 
-connection.connect(function(err) {
-  if (err) throw err
-  console.log('You are now connected...');
-});
+var bcrypt     = require('bcryptjs');
+const saltRounds = 10;
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-  if (err) throw err;
+// Sample User Object
+var tempuser = {
+	"username":"UniqueUsername",
+	"password":"CleverPassword",
+	"sid":"0000000",
+	"fname":"First",
+	"lname":"Last",
+	"phone":"8000000911",
+	"email":"test@gmail.com"
+}
 
-  console.log('The solution is: ', rows[0].solution);
-});
+function register(newuser){
+	bcrypt.hash(newuser.password, saltRounds, function( err, bcryptedPassword) {
+		// Store hash in your password DB.
+		pool.getConnection(function(err, con) {
+			con.query('CALL REG (?,?,?,?,?,?,?)',
+				[newuser.username, bcryptedPassword, newuser.sid,
+				 newuser.fname, newuser.lname, newuser.phone, newuser.email], function(err,res){
+			  if(err) throw err;
+			  
+			  // Report to User what happened
+			});
+			con.release();
+		});
+	});
+};
 
-connection.end();
+function validate(login){
+	pool.getConnection(function(err, con) {
+		con.query('CALL VAL(?)',[login.username],function(err,res){
+			if(err) throw err; // Have to handle if nothing is returned!
+			// Username is unique so only one row will be returned
+			// db_hash = res[0][0].pass; 
+
+			bcrypt.compare(login.password, res[0][0].pass, function(err, doesMatch){
+				if (doesMatch){
+					// Let em in
+					console.log("Welcome");
+				}else{
+					// Go away
+					console.log("GTFO");
+				}
+			});
+		});
+		con.release();
+	});
+};
