@@ -1,0 +1,21 @@
+{
+  "name": "EEIT",
+  "version": "1.0.0",
+  "description": "Electrical Engineering Inventory Tracker",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spellchaser/EEIT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Spellchaser/EEIT/issues"
+  },
+  "homepage": "https://github.com/Spellchaser/EEIT#readme"
+}
