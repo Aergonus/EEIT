@@ -53,3 +53,6 @@ function validate(login){
 		con.release();
 	});
 };
+
+module.exports.register = register;
+module.exports.validate = validate;
