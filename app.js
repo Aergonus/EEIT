@@ -1,22 +1,21 @@
 'use strict';
 
-var mysql = require('./mysql_interface')
+var mysql = require('./mysql_interface'); // Include MySQL connections and functions that interact with the db
 
 //var routes = require('./lib/routes');
 
-var express    = require('express');
-var app        = express();
-var path       = require('path');
-app.use(express.static(path.join(__dirname, "public_html")));
-app.set('view engine', 'jade');
-app.set('views', './lib/views');
-app.locals.siteName = 'Cooper Union Electrical Engineering Inventory Tracker';
+var express    = require('express') 
+  , app        = express()
+  , logger     = require('morgan') // Express middlware for logging requests and responses
+  , path       = require('path') // Core Node module for working with and handling paths
+  , config     = require('./config') // hides secret configuration info
+  , session    = require('client-sessions')
+  , bodyParser = require('body-parser'); // Express middleware that adds body object to request allowing access to POST params
 
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended : true }));
-
-var config     = require('./config');
-var session    = require('client-sessions');
+app.use(logger('dev')); // logs requests to console, dev flag includes extensive info e.g. method, status code, response time
+app.use(express.static(path.join(__dirname, "public"))); // tells app to use public directiory which stores public images, stylesheets, and scripts
+app.set('view engine', 'jade'); // tells Express to use the Jade templating engine
+app.set('views', path.join(__dirname, 'lib', 'views'); // or ./lib/views
 app.use(session({
   cookieName: 'session',
   secret: config.secret_session,
@@ -26,6 +25,12 @@ app.use(session({
   secure: true,
   ephemeral: true
 }));
+app.use(bodyParser.urlencoded({ extended : true }));
+app.locals.siteName = 'CU EEIT'; // 'Cooper Union Electrical Engineering Inventory Tracker';
+
+
+
+
 
 //app.use('/', routes);
 var port = process.env.PORT || 3000;
@@ -56,7 +61,7 @@ app.get('/register', function (req, res) {
   res.render('register.jade');
 });
 app.post('/register', function (req, res) {
-  //res.json(req.body);
+  //var input = res.json(req.body);
   var userinput = {
 	"username" : req.body.username,
 	"password" : req.body.password,
@@ -66,7 +71,9 @@ app.post('/register', function (req, res) {
 	"phone"    : req.body.phone,
 	"email"    : req.body.email
   };
-  //mysql.register(userinput);
+  console.log(userinput);
+  mysql.register(userinput);
+  //res.render('dashboard.jade');
   // if successful redirect, if not back to register with error passed
   //res.render('register.jade', {error : error});
 });
