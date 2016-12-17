@@ -11,7 +11,7 @@ var express    = require('express')
 app.use(logger('dev')); // logs requests to console, dev flag includes extensive info e.g. method, status code, response time
 app.use(express.static(path.join(__dirname, "public"))); // tells app to use public directiory which stores public images, stylesheets, and scripts
 app.set('view engine', 'jade'); // tells Express to use the Jade templating engine
-app.set('views', path.join(__dirname, 'lib', 'views'); // or ./lib/views
+app.set('views', path.join(__dirname, 'lib', 'views')); // or ./lib/views
 app.use(session({
   cookieName: 'session',
   secret: config.secret_session,
