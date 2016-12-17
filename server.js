@@ -39,6 +39,24 @@ app.get('/', function (req, res) {
 app.get('/login', function (req, res) {
   res.render('login.jade');
 });
+app.post('/login', function (req, res) {
+   // Prepare output in JSON format
+   var login = {
+      username : req.body.username,
+      password : req.body.password
+   };
+   // Check if credentials match
+   mysql.validate(login, function(err, doesMatch) {
+      if (doesMatch) {
+        res.send("Welcome");
+        console.log("Welcome");
+      } else {
+        // Go away
+        res.send("GTFO");
+        console.log("GTFO");
+      }
+   });
+});
 app.get('/register', function (req, res) {
   res.render('register.jade');
 });
@@ -53,9 +71,17 @@ app.post('/register', function (req, res) {
 	"phone"    : req.body.phone,
 	"email"    : req.body.email
   };
-  console.log(userinput);
-  //mysql.register(userinput);
-  //res.render('dashboard.jade');
+  mysql.register(userinput, function(err, result) {
+      if (err) {
+          res.send("Could not register.");
+          return;
+      }
+      else {
+        res.send("You have successfully registered!")
+          //res.render('dashboard.jade');
+      }
+  });
+
   // if successful redirect, if not back to register with error passed
   //res.render('register.jade', {error : error});
 });

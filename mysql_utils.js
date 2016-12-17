@@ -26,38 +26,45 @@ var getConnection = function(callback) {
     });
 };
 
-function register(newuser){
+function register(newuser, callback){
 	bcrypt.hash(newuser.password, saltRounds, function( err, bcryptedPassword) {
 		// Store hash in your password DB.
 		pool.getConnection(function(err, con) {
 			con.query('CALL REG (?,?,?,?,?,?,?)',
 				[newuser.username, bcryptedPassword, newuser.sid,
-				 newuser.fname, newuser.lname, newuser.phone, newuser.email], function(err,res){
-			  if(err) throw err;
-			  
-			  // Report to User what happened
+				 newuser.fname, newuser.lname, newuser.phone, newuser.email], function(err,result){
+				 callback(err, result);
 			});
 			con.release();
 		});
 	});
 };
 
-function validate(login){
+function validate(login, callback){
 	pool.getConnection(function(err, con) {
-		con.query('CALL VAL(?)',[login.username],function(err,res){
-			if(err) throw err; // Have to handle if nothing is returned!
+		con.query('CALL VAL(?)',[login.username],function(err,result){
+			if (err) {
+				//throw err; // Have to handle if nothing is returned!
+				console.log("Error querying user in database.");
+				con.release();
+				return;
+			}
+			if (result[0][0] == undefined) {
+				console.log("No matching users in database.");
+				con.release();
+				return;
+			}
+			if (result == '') {
+				console.log("Incorrect credentials.");
+				con.release();
+				return;
+			}
 			// Username is unique so only one row will be returned
 			// db_hash = res[0][0].pass; 
 			// first 0 gets the query results rather than query statistic info, second 0 retrieves the first record of query results
 			
-			bcrypt.compare(login.password, res[0][0].pass, function(err, doesMatch){
-				if (doesMatch){
-					// Let em in
-					console.log("Welcome");
-				}else{
-					// Go away
-					console.log("GTFO");
-				}
+			bcrypt.compare(login.password, result[0][0].pass, function(err, doesMatch){
+				callback(err, doesMatch);
 			});
 			con.release();
 		});
