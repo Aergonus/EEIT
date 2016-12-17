@@ -1,3 +1,5 @@
+'use strict';
+
 var mysql      = require('mysql');
 var env        = process.env.NODE_ENV || 'dev';
 var connection = require('./config')[env];
@@ -17,6 +19,13 @@ var tempuser = {
 	"email":"test@gmail.com"
 }
 
+// Remember to release connection.release()
+var getConnection = function(callback) {
+    pool.getConnection(function(err, connection) {
+        callback(err, connection);
+    });
+};
+
 function register(newuser){
 	bcrypt.hash(newuser.password, saltRounds, function( err, bcryptedPassword) {
 		// Store hash in your password DB.
@@ -33,26 +42,32 @@ function register(newuser){
 	});
 };
 
-function validate(login){
+function validate(login, callback){
+	console.log(callback);
 	pool.getConnection(function(err, con) {
 		con.query('CALL VAL(?)',[login.username],function(err,res){
 			if(err) throw err; // Have to handle if nothing is returned!
 			// Username is unique so only one row will be returned
 			// db_hash = res[0][0].pass; 
-
+			con.release();
+			
 			bcrypt.compare(login.password, res[0][0].pass, function(err, doesMatch){
 				if (doesMatch){
 					// Let em in
-					console.log("Welcome");
+					//callback(null, true);
+					//callback(true);
+					return callback(true);
 				}else{
 					// Go away
-					console.log("GTFO");
+					//callback(new Error("Invalid Login"), false);
+					//callback(false);
+					return callback(false);
 				}
 			});
 		});
-		con.release();
 	});
 };
-
+	
+module.exports.getCon = getConnection;
 module.exports.register = register;
 module.exports.validate = validate;

@@ -15,7 +15,7 @@ CREATE  TABLE IF NOT EXISTS `EEIT`.`Users` (
   `fname` VARCHAR(20) NOT NULL , -- first name
   `lname` VARCHAR(20) NOT NULL , -- last name
   `phone` CHAR(10) NULL , -- phone number
-  `email` VARCHAR(320) NULL UNIQUE , -- email address
+  `email` VARCHAR(320) NOT NULL UNIQUE , -- email address
   `regtime` DATETIME NOT NULL, -- register time
   PRIMARY KEY (`uid`) )
 ENGINE = InnoDB;
