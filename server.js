@@ -33,19 +33,6 @@ var expressServer = app.listen(port, function () {
   console.log('Server listening on http://localhost:' + port);
 });
 
-var tempuser = {
-	"username":"UniqueUsername",
-	"password":"CleverPassword",
-	"sid":"0000000",
-	"fname":"First",
-	"lname":"Last",
-	"phone":"8000000911",
-	"email":"temp@gmail.com"
-}
-
-//mysql.register(tempuser);
-mysql.validate(tempuser);
-
 app.get('/', function (req, res) {
   res.render('home.jade');
 });
@@ -67,7 +54,7 @@ app.post('/register', function (req, res) {
 	"email"    : req.body.email
   };
   console.log(userinput);
-  mysql.register(userinput);
+  //mysql.register(userinput);
   //res.render('dashboard.jade');
   // if successful redirect, if not back to register with error passed
   //res.render('register.jade', {error : error});

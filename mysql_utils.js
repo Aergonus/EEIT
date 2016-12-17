@@ -43,29 +43,23 @@ function register(newuser){
 };
 
 function validate(login){
-	//console.log(callback);
 	pool.getConnection(function(err, con) {
 		con.query('CALL VAL(?)',[login.username],function(err,res){
 			if(err) throw err; // Have to handle if nothing is returned!
 			// Username is unique so only one row will be returned
 			// db_hash = res[0][0].pass; 
-			con.release();
+			// first 0 gets the query results rather than query statistic info, second 0 retrieves the first record of query results
 			
 			bcrypt.compare(login.password, res[0][0].pass, function(err, doesMatch){
 				if (doesMatch){
 					// Let em in
-					//callback(null, true);
-					//callback(true);
-					//return callback(true);
 					console.log("Welcome");
 				}else{
 					// Go away
-					//callback(new Error("Invalid Login"), false);
-					//callback(false);
-					//return callback(false);
 					console.log("GTFO");
 				}
 			});
+			con.release();
 		});
 	});
 };
@@ -73,3 +67,18 @@ function validate(login){
 module.exports.getCon = getConnection;
 module.exports.register = register;
 module.exports.validate = validate;
+
+/* Example useage
+var tempuser = {
+	"username":"UniqueUsername",
+	"password":"CleverPassword",
+	"sid":"0000000",
+	"fname":"First",
+	"lname":"Last",
+	"phone":"8000000911",
+	"email":"temp@gmail.com"
+}
+
+mysql.register(tempuser);
+mysql.validate(tempuser);
+*/
