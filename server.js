@@ -1,9 +1,5 @@
 'use strict';
 
-var mysql = require('./mysql_interface'); // Include MySQL connections and functions that interact with the db
-
-//var routes = require('./lib/routes');
-
 var express    = require('express') 
   , app        = express()
   , logger     = require('morgan') // Express middlware for logging requests and responses
@@ -28,11 +24,10 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended : true }));
 app.locals.siteName = 'CU EEIT'; // 'Cooper Union Electrical Engineering Inventory Tracker';
 
-
-
-
-
+var mysql = require('./mysql_utils'); // Include MySQL connections and functions that interact with the db
+//var routes = require('./lib/routes');
 //app.use('/', routes);
+
 var port = process.env.PORT || 3000;
 var expressServer = app.listen(port, function () {
   console.log('Server listening on http://localhost:' + port);
@@ -83,84 +78,3 @@ app.get('/dashboard', function (req, res) {
 app.get('/logout', function (req, res) {
   res.redirect('/');
 });
-/*
-app.post('/login', function(req, res) {
-	mysql.validate( req.body, function(req, ) {
-		console.log(res);
-	});
-});
-*/
-/*
-app.post('/login', function(req, res) {
-	mysql.validate( {
-		
-	{"username":req.body.username, , function(err, res);
-
-
-  User.findOne({ email: req.body.email }, function(err, user) {
-    if (!user) {
-      res.render('login.jade', { error: 'Invalid email or password.' });
-    } else {
-      if (req.body.password === user.password) {
-        // sets a cookie with the user's info
-        req.session.user = user;
-        res.redirect('/dashboard');
-      } else {
-        res.render('login.jade', { error: 'Invalid email or password.' });
-      }
-    }
-  });
-});
-
-app.get('/dashboard', function(req, res) {
-  if (req.session && req.session.user) { // Check if session exists
-    // lookup the user in the DB by pulling their email from the session
-    User.findOne({ email: req.session.user.email }, function (err, user) {
-      if (!user) {
-        // if the user isn't found in the DB, reset the session info and
-        // redirect the user to the login page
-        req.session.reset();
-        res.redirect('/login');
-      } else {
-        // expose the user to the template
-        res.locals.user = user;
- 
-        // render the dashboard page
-        res.render('dashboard.jade');
-      }
-    });
-  } else {
-    res.redirect('/login');
-  }
-});
-
-app.use(function(req, res, next) {
-  if (req.session && req.session.user) {
-    User.findOne({ email: req.session.user.email }, function(err, user) {
-      if (user) {
-        req.user = user;
-        delete req.user.password; // delete the password from the session
-        req.session.user = user;  //refresh the session value
-        res.locals.user = user;
-      }
-      // finishing processing the middleware and run the route
-      next();
-    });
-  } else {
-    next();
-  }
-});
-
-function requireLogin (req, res, next) {
-  if (!req.user) {
-    res.redirect('/login');
-  } else {
-    next();
-  }
-};
-
-app.get('/logout', function(req, res) {
-  req.session.reset();
-  res.redirect('/');
-});
-*/
