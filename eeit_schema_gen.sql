@@ -31,10 +31,10 @@ CREATE  TABLE IF NOT EXISTS `EEIT`.`Requests` (
   PRIMARY KEY (`rid`) , 
   INDEX `Requests_index_uid` (`uid` ASC) ,
   CONSTRAINT `FK_uid_requests`
-    FOREIGN KEY (`uid` )
-    REFERENCES `EEIT`.`Users` (`uid` )
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
+	FOREIGN KEY (`uid` )
+	REFERENCES `EEIT`.`Users` (`uid` )
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -73,15 +73,15 @@ CREATE  TABLE IF NOT EXISTS `EEIT`.`Equipment` (
   INDEX `Equipment_index_lid` (`lid` ASC) ,
   INDEX `Equipment_index_etid` (`etid` ASC) ,
   CONSTRAINT `FK_etid_equipment`
-    FOREIGN KEY (`etid` )
-    REFERENCES `EEIT`.`EquipmentTypes` (`etid` )
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
+	FOREIGN KEY (`etid` )
+	REFERENCES `EEIT`.`EquipmentTypes` (`etid` )
+	ON DELETE RESTRICT
+	ON UPDATE CASCADE,
   CONSTRAINT `FK_lid_equipment`
-    FOREIGN KEY (`lid` )
-    REFERENCES `EEIT`.`Locations` (`lid` )
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE)
+	FOREIGN KEY (`lid` )
+	REFERENCES `EEIT`.`Locations` (`lid` )
+	ON DELETE RESTRICT
+	ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -98,15 +98,15 @@ CREATE  TABLE IF NOT EXISTS `EEIT`.`StatusReports` (
   INDEX `StatusReports_index_eid` (`eid` ASC) ,
   INDEX `StatusReports_index_uid` (`uid` ASC) ,
   CONSTRAINT `FK_eid_statusreports`
-    FOREIGN KEY (`eid` )
-    REFERENCES `EEIT`.`Equipment` (`eid` )
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
+	FOREIGN KEY (`eid` )
+	REFERENCES `EEIT`.`Equipment` (`eid` )
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE,
   CONSTRAINT `FK_uid_statusreports`
-    FOREIGN KEY (`uid` )
-    REFERENCES `EEIT`.`Users` (`uid` )
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
+	FOREIGN KEY (`uid` )
+	REFERENCES `EEIT`.`Users` (`uid` )
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -120,10 +120,10 @@ CREATE  TABLE IF NOT EXISTS `EEIT`.`Kits` (
   PRIMARY KEY (`kid`) ,
   INDEX `Kits_index_uid` (`uid` ASC) ,
   CONSTRAINT `FK_uid_kits`
-    FOREIGN KEY (`uid` )
-    REFERENCES `EEIT`.`Users` (`uid` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+	FOREIGN KEY (`uid` )
+	REFERENCES `EEIT`.`Users` (`uid` )
+	ON DELETE CASCADE
+	ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -136,25 +136,25 @@ CREATE  TABLE IF NOT EXISTS `EEIT`.`KitEntries` (
   INDEX `KitEntries_index_kid` (`kid` ASC) ,
   PRIMARY KEY (`kid`, `etid`) ,
   CONSTRAINT `FK_kid_kitentries`
-    FOREIGN KEY (`kid` )
-    REFERENCES `EEIT`.`Kits` (`kid` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+	FOREIGN KEY (`kid` )
+	REFERENCES `EEIT`.`Kits` (`kid` )
+	ON DELETE CASCADE
+	ON UPDATE CASCADE,
   CONSTRAINT `FK_etid_kitentries`
-    FOREIGN KEY (`etid` )
-    REFERENCES `EEIT`.`EquipmentTypes` (`etid` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+	FOREIGN KEY (`etid` )
+	REFERENCES `EEIT`.`EquipmentTypes` (`etid` )
+	ON DELETE CASCADE
+	ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 DELIMITER $$
 CREATE PROCEDURE Reg(IN newuser varchar(20), IN bcryptedhash varchar(60),
 					 IN in_sid CHAR(10), IN in_fname VARCHAR(20), IN in_lname VARCHAR(20),
-                     IN in_phone CHAR(10), IN in_email VARCHAR(320))
+					 IN in_phone CHAR(10), IN in_email VARCHAR(320))
 BEGIN
 INSERT INTO Users (`user`, `pass`, `utype`, `sid`, `fname`, `lname`, `phone`, `email`, `regtime`)
 	VALUES
-    (newuser, bcryptedhash, 'student', in_sid, in_fname, in_lname, in_phone, in_email, NOW());
+	(newuser, bcryptedhash, 'student', in_sid, in_fname, in_lname, in_phone, in_email, NOW());
 END;
 
 CREATE PROCEDURE Val(IN loginuser varchar(50))

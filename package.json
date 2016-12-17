@@ -4,30 +4,30 @@
   "description": "Electrical Engineering Inventory Tracker",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+	"test": "echo \"Error: no test specified\" && exit 1",
 	"watch": "nodemon -e js,jade",
-    "start": "node server"
+	"start": "node server"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Spellchaser/EEIT.git"
+	"type": "git",
+	"url": "git+https://github.com/Spellchaser/EEIT.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Spellchaser/EEIT/issues"
+	"url": "https://github.com/Spellchaser/EEIT/issues"
   },
   "homepage": "https://github.com/Spellchaser/EEIT#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.0",
-    "body-parser": "^1.15.2",
-    "client-sessions": "^0.7.0",
-    "express": "^4.14.0",
-    "jade": "^1.11.0",
-    "morgan": "^1.7.0",
-    "mysql": "^2.12.0",
-    "nodemon": "^1.9.2",
-    "path": "^0.12.7"
+	"bcryptjs": "^2.4.0",
+	"body-parser": "^1.15.2",
+	"client-sessions": "^0.7.0",
+	"express": "^4.14.0",
+	"jade": "^1.11.0",
+	"morgan": "^1.7.0",
+	"mysql": "^2.12.0",
+	"nodemon": "^1.9.2",
+	"path": "^0.12.7"
   }
 }

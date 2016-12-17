@@ -1,11 +1,11 @@
 'use strict';
 
-var mysql      = require('mysql');
-var env        = process.env.NODE_ENV || 'dev';
+var mysql	  = require('mysql');
+var env		= process.env.NODE_ENV || 'dev';
 var connection = require('./config')[env];
-var pool       = mysql.createPool(connection);
+var pool	   = mysql.createPool(connection);
 
-var bcrypt     = require('bcryptjs');
+var bcrypt	 = require('bcryptjs');
 const saltRounds = 10;
 
 // Sample User Object
@@ -21,9 +21,9 @@ var tempuser = {
 
 // Remember to release connection.release()
 var getConnection = function(callback) {
-    pool.getConnection(function(err, connection) {
-        callback(err, connection);
-    });
+	pool.getConnection(function(err, connection) {
+		callback(err, connection);
+	});
 };
 
 function register(newuser, callback){

@@ -1,11 +1,11 @@
 'use strict';
 
-var express    = require('express') 
-  , app        = express()
-  , logger     = require('morgan') // Express middlware for logging requests and responses
-  , path       = require('path') // Core Node module for working with and handling paths
-  , config     = require('./config') // hides secret configuration info
-  , session    = require('client-sessions')
+var express	= require('express') 
+  , app		= express()
+  , logger	 = require('morgan') // Express middlware for logging requests and responses
+  , path	   = require('path') // Core Node module for working with and handling paths
+  , config	 = require('./config') // hides secret configuration info
+  , session	= require('client-sessions')
   , bodyParser = require('body-parser'); // Express middleware that adds body object to request allowing access to POST params
 
 app.use(logger('dev')); // logs requests to console, dev flag includes extensive info e.g. method, status code, response time
@@ -42,19 +42,19 @@ app.get('/login', function (req, res) {
 app.post('/login', function (req, res) {
    // Prepare output in JSON format
    var login = {
-      username : req.body.username,
-      password : req.body.password
+	  username : req.body.username,
+	  password : req.body.password
    };
    // Check if credentials match
    mysql.validate(login, function(err, doesMatch) {
-      if (doesMatch) {
-        res.send("Welcome");
-        console.log("Welcome");
-      } else {
-        // Go away
-        res.send("GTFO");
-        console.log("GTFO");
-      }
+	  if (doesMatch) {
+		res.send("Welcome");
+		console.log("Welcome");
+	  } else {
+		// Go away
+		res.send("GTFO");
+		console.log("GTFO");
+	  }
    });
 });
 app.get('/register', function (req, res) {
@@ -65,21 +65,21 @@ app.post('/register', function (req, res) {
   var userinput = {
 	"username" : req.body.username,
 	"password" : req.body.password,
-	"sid"      : req.body.sid,
-	"fname"    : req.body.firstname,
-	"lname"    : req.body.lastname,
-	"phone"    : req.body.phone,
-	"email"    : req.body.email
+	"sid"	  : req.body.sid,
+	"fname"	: req.body.firstname,
+	"lname"	: req.body.lastname,
+	"phone"	: req.body.phone,
+	"email"	: req.body.email
   };
   mysql.register(userinput, function(err, result) {
-      if (err) {
-          res.send("Could not register.");
-          return;
-      }
-      else {
-        res.send("You have successfully registered!")
-          //res.render('dashboard.jade');
-      }
+	  if (err) {
+		  res.send("Could not register.");
+		  return;
+	  }
+	  else {
+		res.send("You have successfully registered!")
+		  //res.render('dashboard.jade');
+	  }
   });
 
   // if successful redirect, if not back to register with error passed
