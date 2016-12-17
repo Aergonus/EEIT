@@ -42,8 +42,8 @@ function register(newuser){
 	});
 };
 
-function validate(login, callback){
-	console.log(callback);
+function validate(login){
+	//console.log(callback);
 	pool.getConnection(function(err, con) {
 		con.query('CALL VAL(?)',[login.username],function(err,res){
 			if(err) throw err; // Have to handle if nothing is returned!
@@ -56,12 +56,14 @@ function validate(login, callback){
 					// Let em in
 					//callback(null, true);
 					//callback(true);
-					return callback(true);
+					//return callback(true);
+					console.log("Welcome");
 				}else{
 					// Go away
 					//callback(new Error("Invalid Login"), false);
 					//callback(false);
-					return callback(false);
+					//return callback(false);
+					console.log("GTFO");
 				}
 			});
 		});

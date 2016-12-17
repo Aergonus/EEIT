@@ -76,11 +76,13 @@ app.get('/dashboard', function (req, res) {
 app.get('/logout', function (req, res) {
   res.redirect('/');
 });
+/*
 app.post('/login', function(req, res) {
 	mysql.validate( req.body, function(req, ) {
 		console.log(res);
 	});
 });
+*/
 /*
 app.post('/login', function(req, res) {
 	mysql.validate( {
