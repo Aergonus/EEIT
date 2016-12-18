@@ -1,6 +1,6 @@
 'use strict';
 
-var express		= require('express') 
+var express		= require('express') // npm install express
 	, app		= express()
 	, logger	= require('morgan') // Express middlware for logging requests and responses
 	, path		= require('path') // Core Node module for working with and handling paths
@@ -8,10 +8,18 @@ var express		= require('express')
 	, session	= require('client-sessions') // session lib by mozilla 
 	, bodyParser = require('body-parser'); // Express middleware that adds body object to request allowing access to POST params
 
+/* For Express application */
 app.use(logger('dev')); // logs requests to console, dev flag includes extensive info e.g. method, status code, response time
-app.use(express.static(path.join(__dirname, "public"))); // tells app to use public directiory which stores public images, stylesheets, and scripts
+app.use(express.static(path.join(__dirname, "public"))); // tells app to use public directory which stores public images, stylesheets, and scripts
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true })); // for parsing application/x-www-form-urlencoded
+// if you don't use the parser you're gonna get undefined for your http body (?)
+
+/* Set-up Jade for front-end */
 app.set('view engine', 'jade'); // tells Express to use the Jade templating engine
 app.set('views', path.join(__dirname, 'lib', 'views')); // or ./lib/views
+
+/* Sessions */
 app.use(session({
 	cookieName: 'session',
 	secret: config.secret_session,
@@ -21,31 +29,47 @@ app.use(session({
 	secure: true,
 	ephemeral: true
 }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended : true }));
+
 app.locals.siteName = 'CU EEIT'; // 'Cooper Union Electrical Engineering Inventory Tracker';
 app.locals.pretty = true; // Send pretty code
 
 var router = express.Router();
 app.use(router);
 
+/* To interface with MySQL */
 var mysql = require('./mysql_utils'); // Include MySQL connections and functions that interact with the db
 //var routes = require('./lib/routes');
 //app.use('/', routes);
 
+/* Listen for connections */
 var port = process.env.PORT || 3000;
 var expressServer = app.listen(port, function () {
-	console.log('Server listening on http://localhost:' + port);
+	console.log('Server listening on http://localhost:' + expressServer.address().port);
 });
 
-
-
+/* Handle HTTP messages */
 
 /**
  * Render the home page.
  */
 app.get('/', function (req, res) {
 	res.render('home.jade');
+});
+
+/**
+ * Render the registration page.
+ */
+app.get('/register', function (req, res) {
+	res.render('register.jade');
+	//res.render('register.jade', { csrfToken: req.csrfToken() });
+});
+
+/**
+ * Render the login page.
+ */
+app.get('/login', function (req, res) {
+	res.render('login.jade');
+	//res.render('login.jade', { csrfToken: req.csrfToken() });
 });
 
 /**
@@ -59,14 +83,6 @@ router.get('/dashboard', utils.requireLogin, function(req, res) {
 	res.render('dashboard.jade');
 });
 */
-
-/**
- * Render the registration page.
- */
-app.get('/register', function (req, res) {
-	res.render('register.jade');
-	//res.render('register.jade', { csrfToken: req.csrfToken() });
-});
 
 /**
  * Create a new user account.
@@ -84,30 +100,23 @@ app.post('/register', function (req, res) {
 		"phone"		: req.body.phone,
 		"email"		: req.body.email
 	};
-	mysql.register(userinput, function(err, result) {
+	// if successful, redirect; if not, display error on same pageåå
+	mysql.register(userinput, function(err) {
 		if (err) {
-			var error = 'Registration failed. Please try again.';
+			//var error = 'Registration failed. Please try again.';
 			// Check error code from mysql, ex duplicate email already taken
 			/* 
 			if (err.code === 11000) {
 			error = 'That email is already taken, please try another.';
 			}
 			*/
-			res.render('register.jade', { error: error });
-		}
-		else {
+			res.render('register.jade', { error: err.message });
+		} else {
+			//res.send('Welcome ' + req.body.username + '!');
 			//utils.createUserSession(req, res, user);
 			res.redirect('/dashboard');
 		}
 	});
-});
-
-/**
- * Render the login page.
- */
-app.get('/login', function (req, res) {
-	res.render('login.jade');
-	//res.render('login.jade', { csrfToken: req.csrfToken() });
 });
 
 /**
@@ -122,11 +131,12 @@ app.post('/login', function (req, res) {
 		"password" : req.body.password
 	};
 	// Check if credentials match
-	mysql.validate(login, function(err, doesMatch) {
+	mysql.validate(login, function(err, username) {
 		if (err) {
 			//res.render('login.jade', { error: "Incorrect email / password.", csrfToken: req.csrfToken() });
 			res.render('login.jade', { error: err.message });
 		} else {
+			//res.send('Welcome, ' + username + '! What would you like to do?');
 			//utils.createUserSession(req, res, user);
 			res.redirect('/dashboard');
 		}
