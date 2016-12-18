@@ -41,31 +41,30 @@ function register(newuser, callback){
 };
 
 function validate(login, callback){
-	pool.getConnection(function(err, con) {
+	pool.getConnection(function(err, con){
 		con.query('CALL VAL(?)',[login.username],function(err,result){
 			if (err) {
-				//throw err; // Have to handle if nothing is returned!
-				console.log("Error querying user in database.");
-				con.release();
-				return;
-			}
-			if (result[0][0] == undefined) {
-				console.log("No matching users in database.");
-				con.release();
-				return;
-			}
-			if (result == '') {
-				console.log("Incorrect credentials.");
-				con.release();
-				return;
-			}
-			// Username is unique so only one row will be returned
-			// db_hash = res[0][0].pass; 
-			// first 0 gets the query results rather than query statistic info, second 0 retrieves the first record of query results
+				//callback(err); // debug only
+				callback(new Error('Error querying user in database.'));
+			} else if (result[0][0] == undefined) {
+				callback(new Error('User not found.'));
+			} else if (result == '') {
+				callback(new Error('Incorrect credentials.'));
+			} else {
+				// Username is unique so only one row will be returned
+				// db_hash = res[0][0].pass; 
+				// first 0 gets the query results rather than query statistic info, second 0 retrieves the first record of query results
 			
-			bcrypt.compare(login.password, result[0][0].pass, function(err, doesMatch){
-				callback(err, doesMatch);
-			});
+				bcrypt.compare(login.password, result[0][0].pass, function(err, doesMatch){
+					if (err) {
+						callback(new Error("Something unexpected happened :("));
+					} else if (doesMatch) {
+						callback(null, login);
+					} else {
+						callback(new Error("Incorrect email / password."));
+					}
+				});
+			}
 			con.release();
 		});
 	});
