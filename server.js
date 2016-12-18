@@ -189,3 +189,13 @@ router.post('/logout', function(req, res) {
 	console.log(req.session);
 	res.redirect('/');
 });
+
+/**
+ * Upon click, redirect to search page and render it
+ */
+router.post('/search', function(req, res) {
+	res.redirect('/search');
+});
+router.get('/search', function(req, res) {
+	res.render('search.jade');
+});
