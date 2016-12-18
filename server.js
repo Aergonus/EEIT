@@ -103,6 +103,7 @@ router.post('/register', function (req, res) {
 		} else {
 			//res.send('Welcome ' + req.body.username + '!');
 			//utils.createUserSession(req, res, user);
+			req.session.user = userinput.username;
 			res.redirect('/dashboard');
 		}
 	});
@@ -128,7 +129,7 @@ router.post('/login', function(req, res) {
 		} else {
 			// Set cookie with user's login info
 			// The session has begun
-			req.session.user = login;
+			req.session.user = login.username;
 			res.redirect('/dashboard');
 			//res.render('dashboard.jade', { user: login.username });
 			//res.send('Welcome, ' + username + '! What would you like to do?');
@@ -145,13 +146,13 @@ router.post('/login', function(req, res) {
 router.use(function(req, res, next) {
 	// Check if the session still exists
 	//console.log("HELLO");
-	//console.log(req.session);
-	//console.log(req.session.user);
+	console.log(req.session);
+	console.log(req.session.user);
 	// Check this to see if session still exists
 	if (req.session && req.session.user) {
 		console.log("SESSION STATUS: ");
 		console.log(req.session.user);
-		delete req.session.user.password; // delete the password from the session
+		//delete req.session.user.password; // delete the password from the session
         res.locals.user = req.session.user; // What's this for?
     }
     // Finishing processing the middleware and run the route
@@ -175,7 +176,7 @@ function checkSession (req, res, next) {
  * Need to check if session is still active using middleware function, or it will go back to login
  */
 router.get('/dashboard', checkSession, function(req, res) {
-	res.render('dashboard.jade', { user: req.session.user.username });
+	res.render('dashboard.jade', { user: req.session.user });
 });
 
 /**
