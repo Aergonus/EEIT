@@ -20,6 +20,10 @@ nav.navbar.navbar-default.navbar-static-top
           ul.nav.navbar-nav.navbar-right
             li
               a(onclick="document.getElementById('logout_form').submit();", style="cursor: pointer;") Logout
+        form(action='/search', method='POST', id="search_form")
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(onclick="document.getElementById('search_form').submit();", style="cursor: pointer;") Search
       else
         ul.nav.navbar-nav.navbar-right
           li(class='#{nav.Login}')
