@@ -39,8 +39,7 @@ function register(newuser, callback) {
         if (err) {
             // We're sending this message back to the user
             callback(new Error("Cannot connect to database."));
-            con.release();
-            return console.error("getConnection: Error connecting to database: " + err);
+            console.error("getConnection: Error connecting to database: " + err);
         } else {
             // Store hash in your password DB.
             bcrypt.hash(newuser.password, saltRounds, function(err, bcryptedPassword) {
@@ -48,7 +47,7 @@ function register(newuser, callback) {
                 if (err) {
                     callback(new Error("Unexpected error."));
                     con.release();
-                    return console.error("hash: Error hashing password: " + err);
+                    console.error("hash: Error hashing password: " + err);
                 }
                 con.query('CALL REG (?,?,?,?,?,?,?)',
                     [newuser.username, bcryptedPassword, newuser.sid,

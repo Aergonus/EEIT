@@ -1,5 +1,6 @@
 'use strict';
 
+/* Middleware */
 var express		= require('express') // npm install express
 	, app		= express()
 	, logger	= require('morgan') // Express middlware for logging requests and responses
@@ -22,9 +23,9 @@ app.set('views', path.join(__dirname, 'lib', 'views')); // or ./lib/views
 /* Sessions */
 app.use(session({
 	cookieName: 'session',
-	secret: config.secret_session,
-	duration: 30 * 60 * 1000,
-	activeDuration: 5 * 60 * 1000,
+	secret: config.secret_session, // seal the cookie in a tight jar
+	duration: 30 * 60 * 1000, // duration of session in ms
+	activeDuration: 5 * 60 * 1000, // used to lengthen session through interaction with site
 	httpOnly: true,
 	secure: true,
 	ephemeral: true
@@ -52,14 +53,14 @@ var expressServer = app.listen(port, function () {
 /**
  * Render the home page.
  */
-app.get('/', function (req, res) {
+router.get('/', function (req, res) {
 	res.render('home.jade');
 });
 
 /**
  * Render the registration page.
  */
-app.get('/register', function (req, res) {
+router.get('/register', function (req, res) {
 	res.render('register.jade');
 	//res.render('register.jade', { csrfToken: req.csrfToken() });
 });
@@ -67,29 +68,17 @@ app.get('/register', function (req, res) {
 /**
  * Render the login page.
  */
-app.get('/login', function (req, res) {
+router.get('/login', function (req, res) {
 	res.render('login.jade');
 	//res.render('login.jade', { csrfToken: req.csrfToken() });
 });
-
-/**
- * Render the dashboard page.
- */
-app.get('/dashboard', function (req, res) {
-	res.render('dashboard.jade');
-});
-/*
-router.get('/dashboard', utils.requireLogin, function(req, res) {
-	res.render('dashboard.jade');
-});
-*/
 
 /**
  * Create a new user account.
  *
  * Once a user is logged in, they will be sent to the dashboard page.
  */
-app.post('/register', function (req, res) {
+router.post('/register', function (req, res) {
 	// Prepare input in JSON format
 	var userinput = {
 		"username"	: req.body.username,
@@ -121,10 +110,10 @@ app.post('/register', function (req, res) {
 
 /**
  * Log a user into their account.
- *
  * Once a user is logged in, they will be sent to the dashboard page.
+ * The login also triggers a session start.
  */
-app.post('/login', function (req, res) {
+router.post('/login', function(req, res) {
 	// Prepare input in JSON format
 	var login = {
 		"username" : req.body.username,
@@ -135,22 +124,67 @@ app.post('/login', function (req, res) {
 		if (err) {
 			//res.render('login.jade', { error: "Incorrect email / password.", csrfToken: req.csrfToken() });
 			res.render('login.jade', { error: err.message });
+		// Successful login
 		} else {
+			// Set cookie with user's login info
+			// The session has begun
+			req.session.user = login;
+			res.redirect('/dashboard');
+			//res.render('dashboard.jade', { user: login.username });
 			//res.send('Welcome, ' + username + '! What would you like to do?');
 			//utils.createUserSession(req, res, user);
-			res.redirect('/dashboard');
 		}
 	});
 });
 
 /**
+ * The main session middleware function
+ * Runs for all requests to the router
+ * Allows it so you don't have to rewrite the session logic for every route
+ */
+router.use(function(req, res, next) {
+	// Check if the session still exists
+	//console.log("HELLO");
+	//console.log(req.session);
+	//console.log(req.session.user);
+	// Check this to see if session still exists
+	if (req.session && req.session.user) {
+		console.log("SESSION STATUS: ");
+		console.log(req.session.user);
+		delete req.session.user.password; // delete the password from the session
+        res.locals.user = req.session.user; // What's this for?
+    }
+    // Finishing processing the middleware and run the route
+    next();
+});
+
+/**
+ * Another middleware function that checks is session is still active
+ * Allows it so you don't have to rewrite the session logic for every route
+ */
+function checkSession (req, res, next) {
+	if (!req.session.user) {
+		res.redirect('/login');
+	} else {
+		next();
+	}
+};
+
+/**
+ * Render the dashboard page after authentication (depends on user).
+ * Need to check if session is still active using middleware function, or it will go back to login
+ */
+router.get('/dashboard', checkSession, function(req, res) {
+	res.render('dashboard.jade', { user: req.session.user.username });
+});
+
+/**
  * Log a user out of their account, then redirect them to the home page.
  */
-app.get('/logout', function (req, res) {
-/*
-	if (req.session) {
-		req.session.reset();
-	}
-*/
+router.post('/logout', function(req, res) {
+	// Clears session if user logs out
+	req.session.reset();
+	console.log("SESSION STATUS: ");
+	console.log(req.session);
 	res.redirect('/');
 });
