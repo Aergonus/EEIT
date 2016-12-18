@@ -1,25 +1,25 @@
 'use strict';
 
-var express    = require('express') 
-  , app        = express()
-  , logger     = require('morgan') // Express middlware for logging requests and responses
-  , path       = require('path') // Core Node module for working with and handling paths
-  , config     = require('./config') // hides secret configuration info
-  , session    = require('client-sessions') // session lib by mozilla 
-  , bodyParser = require('body-parser'); // Express middleware that adds body object to request allowing access to POST params
+var express		= require('express') 
+	, app		= express()
+	, logger	= require('morgan') // Express middlware for logging requests and responses
+	, path		= require('path') // Core Node module for working with and handling paths
+	, config	= require('./config') // hides secret configuration info
+	, session	= require('client-sessions') // session lib by mozilla 
+	, bodyParser = require('body-parser'); // Express middleware that adds body object to request allowing access to POST params
 
 app.use(logger('dev')); // logs requests to console, dev flag includes extensive info e.g. method, status code, response time
 app.use(express.static(path.join(__dirname, "public"))); // tells app to use public directiory which stores public images, stylesheets, and scripts
 app.set('view engine', 'jade'); // tells Express to use the Jade templating engine
 app.set('views', path.join(__dirname, 'lib', 'views')); // or ./lib/views
 app.use(session({
-  cookieName: 'session',
-  secret: config.secret_session,
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
-  httpOnly: true,
-  secure: true,
-  ephemeral: true
+	cookieName: 'session',
+	secret: config.secret_session,
+	duration: 30 * 60 * 1000,
+	activeDuration: 5 * 60 * 1000,
+	httpOnly: true,
+	secure: true,
+	ephemeral: true
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
@@ -35,7 +35,7 @@ var mysql = require('./mysql_utils'); // Include MySQL connections and functions
 
 var port = process.env.PORT || 3000;
 var expressServer = app.listen(port, function () {
-  console.log('Server listening on http://localhost:' + port);
+	console.log('Server listening on http://localhost:' + port);
 });
 
 
@@ -56,7 +56,7 @@ app.get('/dashboard', function (req, res) {
 });
 /*
 router.get('/dashboard', utils.requireLogin, function(req, res) {
-  res.render('dashboard.jade');
+	res.render('dashboard.jade');
 });
 */
 
@@ -65,7 +65,7 @@ router.get('/dashboard', utils.requireLogin, function(req, res) {
  */
 app.get('/register', function (req, res) {
 	res.render('register.jade');
-  //res.render('register.jade', { csrfToken: req.csrfToken() });
+	//res.render('register.jade', { csrfToken: req.csrfToken() });
 });
 
 /**
@@ -76,13 +76,13 @@ app.get('/register', function (req, res) {
 app.post('/register', function (req, res) {
 	// Prepare input in JSON format
 	var userinput = {
-		"username" : req.body.username,
-		"password" : req.body.password,
-		"sid"      : req.body.sid,
-		"fname"    : req.body.firstname,
-		"lname"    : req.body.lastname,
-		"phone"    : req.body.phone,
-		"email"    : req.body.email
+		"username"	: req.body.username,
+		"password"	: req.body.password,
+		"sid"		: req.body.sid,
+		"fname"		: req.body.firstname,
+		"lname"		: req.body.lastname,
+		"phone"		: req.body.phone,
+		"email"		: req.body.email
 	};
 	mysql.register(userinput, function(err, result) {
 		if (err) {
