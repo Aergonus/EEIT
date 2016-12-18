@@ -44,7 +44,7 @@ var mysql = require('./mysql_utils'); // Include MySQL connections and functions
 /* Listen for connections */
 var port = process.env.PORT || 3000;
 var expressServer = app.listen(port, function () {
-	console.log('Server listening on http://localhost:' + expressServer.address().port);
+	console.log('Server listening on http://localhost:%d...', expressServer.address().port);
 });
 
 /* Handle HTTP messages */
