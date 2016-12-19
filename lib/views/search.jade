@@ -13,7 +13,15 @@ block content
     input(type="hidden", name="_csrf", value=csrfToken)
     
     span Part name:
-    input(type="text", name="partname", pattern="[A-Za-z0-9]+", autofocus, placeholder="", required=true)
+    input(type="text", name="partname", autofocus, placeholder="", required=false)
+    br
+
+    span Part number:
+    input(type="text", name="partno", autofocus, placeholder="", required=false)
+    br
+
+    span Description:
+    input(type="text", name="description", autofocus, placeholder="", required=false)
     br
     
     input(type="submit")

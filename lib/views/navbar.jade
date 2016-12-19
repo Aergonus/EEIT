@@ -16,12 +16,12 @@ nav.navbar.navbar-default.navbar-static-top
           li(class='#{nav.Profile}')
             a(href='/profile') My Profile
       if user
-        ul.nav.navbar-nav.navbar-right
-          li(class='#{nav.Logout}')
-            a(href='/logout') Logout
-        ul.nav.navbar-nav.navbar-right
+        ul.nav.navbar-nav
           li(class='#{nav.Search}')
             a(href='/search') Search
+        ul.nav.navbar-nav
+          li(class='#{nav.Logout}')
+            a(href='/logout') Logout
       else
         ul.nav.navbar-nav.navbar-right
           li(class='#{nav.Login}')
