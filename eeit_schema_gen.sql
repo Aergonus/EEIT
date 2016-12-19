@@ -44,7 +44,7 @@ CREATE  TABLE IF NOT EXISTS `EEIT`.`EquipmentTypes` (
   `etid` INT NOT NULL AUTO_INCREMENT, -- equipment type id
   `name` VARCHAR(100) NOT NULL ,
   `hv` BIT NOT NULL , -- True or False High Value
-  `cat` INT NOT NULL ,
+  `cat` VARCHAR(200) NULL ,
   `desc` VARCHAR(200) NULL ,
   `datasheet` VARCHAR(255) NULL ,
   PRIMARY KEY (`etid`) )
