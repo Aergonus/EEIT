@@ -12,14 +12,13 @@ nav.navbar.navbar-default.navbar-static-top
       ul.nav.navbar-nav
         li(class='#{nav.Home}')
           a(href='/') Home
-        if user
-          li(class='#{nav.Profile}')
-            a(href='/profile') My Profile
       if user
         ul.nav.navbar-nav
           li(class='#{nav.Search}')
             a(href='/search') Search
-        ul.nav.navbar-nav
+        ul.nav.navbar-nav.navbar-right
+          li(class='#{nav.Profile}')
+            a(href='/profile') My Profile
           li(class='#{nav.Logout}')
             a(href='/logout') Logout
       else
