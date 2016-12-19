@@ -6,7 +6,7 @@ block vars
 block content
   h1 Dashboard
 
-  if table[0] != undefined
+  if catalog[0] != undefined
     p.
       Displaying matches...
     table(border='1')
@@ -19,12 +19,12 @@ block content
           th Datasheet
           th Item Number
         //-tr
-          //-for val, key in table[0]
+          //-for val, key in catalog[0]
             //-th #{key}
       tbody
-        for tuple in table
+        for entry in catalog
           tr
-            for field in tuple
+            for field in entry
               td= field
   else
     p.
