@@ -1,98 +1,98 @@
 lid,name,room,desc
-,JlabDesk,605,Lab Tech Desk
-,RR,605,Resistor Rack
-,CR,605,Capacitor Rack
-,SS,605,Speaker Shelves
-,CAT,604,Cabinet A Top
-,CBT,604,Cabinet B Top
-,CCT,604,Cabinet C Top
-,C1T,605,Cabinet 1 Top
-,C2T,605,Cabinet 2 Top
-,C3T,605,Cabinet 3 Top
-,CA1,604,Cabinet A Drawer 1
-,CA2,604,Cabinet A Drawer 2
-,CA3,604,Cabinet A Drawer 3
-,CA4,604,Cabinet A Drawer 4
-,CA5,604,Cabinet A Drawer 5
-,CB1,604,Cabinet B Drawer 1
-,CB2,604,Cabinet B Drawer 2
-,CB3,604,Cabinet B Drawer 3
-,CB4,604,Cabinet B Drawer 4
-,CB5,604,Cabinet B Drawer 5
-,CC1,604,Cabinet C Drawer 1
-,CC2,604,Cabinet C Drawer 2
-,CC3,604,Cabinet C Drawer 3
-,CC4,604,Cabinet C Drawer 4
-,CC5,604,Cabinet C Drawer 5
-,C11,605,Cabinet 1 Drawer 1
-,C12,605,Cabinet 1 Drawer 2
-,C13,605,Cabinet 1 Drawer 3
-,C14,605,Cabinet 1 Drawer 4
-,C15,605,Cabinet 1 Drawer 5
-,C21,605,Cabinet 2 Drawer 1
-,C22,605,Cabinet 2 Drawer 2
-,C23,605,Cabinet 2 Drawer 3
-,C24,605,Cabinet 2 Drawer 4
-,C25,605,Cabinet 2 Drawer 5
-,C31,605,Cabinet 3 Drawer 1
-,C32,605,Cabinet 3 Drawer 2
-,C33,605,Cabinet 3 Drawer 3
-,C34,605,Cabinet 3 Drawer 4
-,C35,605,Cabinet 3 Drawer 5
-,SR1,604,Senior Station Desk 1
-,SR2,604,Senior Station Desk 2
-,SR3,604,Senior Station Desk 3
-,SR4,604,Senior Station Desk 4
-,SR5,604,Senior Station Desk 5
-,SR6,604,Senior Station Desk 6
-,SR7,604,Senior Station Desk 7
-,SR8,604,Senior Station Desk 8
-,SR9,604,Senior Station Desk 9
-,SR10,604,Senior Station Desk 10
-,SR11,604,Senior Station Desk 11
-,SR12,604,Senior Station Desk 12
-,SR13,604,Senior Station Desk 13
-,SR14,604,Senior Station Desk 14
-,SR15,604,Senior Station Desk 15
-,SR16,604,Senior Station Desk 16
-,SR17,604,Senior Station Desk 17
-,JR1,605,Junior Station Desk 1
-,JR2,605,Junior Station Desk 2
-,JR3,605,Junior Station Desk 3
-,JR4,605,Junior Station Desk 4
-,JR5,605,Junior Station Desk 5
-,JR6,605,Junior Station Desk 6
-,JR7,605,Junior Station Desk 7
-,JR8,605,Junior Station Desk 8
-,JR9,605,Junior Station Desk 9
-,JR10,605,Junior Station Desk 10
-,JR11,605,Junior Station Desk 11
-,JR12,605,Junior Station Desk 12
-,JR13,605,Junior Station Desk 13
-,JR14,605,Junior Station Desk 14
-,JR15,605,Junior Station Desk 15
-,JR16,605,Junior Station Desk 16
-,BSAU,604,Bookshelf A Upper
-,BSBU,604,Bookshelf B Upper
-,BSCU,604,Bookshelf C Upper
-,BSDU,604,Bookshelf D Upper
-,BSEU,605,Bookshelf E Upper
-,BSFU,605,Bookshelf F Upper
-,BSGU,605,Bookshelf G Upper
-,BSHU,605,Bookshelf H Upper
-,BSIU,605,Bookshelf I Upper
-,BSJU,605,Bookshelf J Upper
-,BSKU,605,Bookshelf K Upper
-,BSLU,605,Bookshelf L Upper
-,BSAL,604,Bookshelf A Lower
-,BSBL,604,Bookshelf B Lower
-,BSCL,604,Bookshelf C Lower
-,BSDL,604,Bookshelf D Lower
-,BSEL,605,Bookshelf E Lower
-,BSFL,605,Bookshelf F Lower
-,BSGL,605,Bookshelf G Lower
-,BSHL,605,Bookshelf H Lower
-,BSIL,605,Bookshelf I Lower
-,BSJL,605,Bookshelf J Lower
-,BSKL,605,Bookshelf K Lower
-,BSLL,605,Bookshelf L Lower
+1,JlabDesk,605,Lab Tech Desk
+2,RR,605,Resistor Rack
+3,CR,605,Capacitor Rack
+4,SS,605,Speaker Shelves
+5,CAT,604,Cabinet A Top
+6,CBT,604,Cabinet B Top
+7,CCT,604,Cabinet C Top
+8,C1T,605,Cabinet 1 Top
+9,C2T,605,Cabinet 2 Top
+10,C3T,605,Cabinet 3 Top
+11,CA1,604,Cabinet A Drawer 1
+12,CA2,604,Cabinet A Drawer 2
+13,CA3,604,Cabinet A Drawer 3
+14,CA4,604,Cabinet A Drawer 4
+15,CA5,604,Cabinet A Drawer 5
+16,CB1,604,Cabinet B Drawer 1
+17,CB2,604,Cabinet B Drawer 2
+18,CB3,604,Cabinet B Drawer 3
+19,CB4,604,Cabinet B Drawer 4
+20,CB5,604,Cabinet B Drawer 5
+21,CC1,604,Cabinet C Drawer 1
+22,CC2,604,Cabinet C Drawer 2
+23,CC3,604,Cabinet C Drawer 3
+24,CC4,604,Cabinet C Drawer 4
+25,CC5,604,Cabinet C Drawer 5
+26,C11,605,Cabinet 1 Drawer 1
+27,C12,605,Cabinet 1 Drawer 2
+28,C13,605,Cabinet 1 Drawer 3
+29,C14,605,Cabinet 1 Drawer 4
+30,C15,605,Cabinet 1 Drawer 5
+31,C21,605,Cabinet 2 Drawer 1
+32,C22,605,Cabinet 2 Drawer 2
+33,C23,605,Cabinet 2 Drawer 3
+34,C24,605,Cabinet 2 Drawer 4
+35,C25,605,Cabinet 2 Drawer 5
+36,C31,605,Cabinet 3 Drawer 1
+37,C32,605,Cabinet 3 Drawer 2
+38,C33,605,Cabinet 3 Drawer 3
+39,C34,605,Cabinet 3 Drawer 4
+40,C35,605,Cabinet 3 Drawer 5
+41,SR1,604,Senior Station Desk 1
+42,SR2,604,Senior Station Desk 2
+43,SR3,604,Senior Station Desk 3
+44,SR4,604,Senior Station Desk 4
+45,SR5,604,Senior Station Desk 5
+46,SR6,604,Senior Station Desk 6
+47,SR7,604,Senior Station Desk 7
+48,SR8,604,Senior Station Desk 8
+49,SR9,604,Senior Station Desk 9
+50,SR10,604,Senior Station Desk 10
+51,SR11,604,Senior Station Desk 11
+52,SR12,604,Senior Station Desk 12
+53,SR13,604,Senior Station Desk 13
+54,SR14,604,Senior Station Desk 14
+55,SR15,604,Senior Station Desk 15
+56,SR16,604,Senior Station Desk 16
+57,SR17,604,Senior Station Desk 17
+58,JR1,605,Junior Station Desk 1
+59,JR2,605,Junior Station Desk 2
+60,JR3,605,Junior Station Desk 3
+61,JR4,605,Junior Station Desk 4
+62,JR5,605,Junior Station Desk 5
+63,JR6,605,Junior Station Desk 6
+64,JR7,605,Junior Station Desk 7
+65,JR8,605,Junior Station Desk 8
+66,JR9,605,Junior Station Desk 9
+67,JR10,605,Junior Station Desk 10
+68,JR11,605,Junior Station Desk 11
+69,JR12,605,Junior Station Desk 12
+70,JR13,605,Junior Station Desk 13
+71,JR14,605,Junior Station Desk 14
+72,JR15,605,Junior Station Desk 15
+73,JR16,605,Junior Station Desk 16
+74,BSAU,604,Bookshelf A Upper
+75,BSBU,604,Bookshelf B Upper
+76,BSCU,604,Bookshelf C Upper
+77,BSDU,604,Bookshelf D Upper
+78,BSEU,605,Bookshelf E Upper
+79,BSFU,605,Bookshelf F Upper
+80,BSGU,605,Bookshelf G Upper
+81,BSHU,605,Bookshelf H Upper
+82,BSIU,605,Bookshelf I Upper
+83,BSJU,605,Bookshelf J Upper
+84,BSKU,605,Bookshelf K Upper
+85,BSLU,605,Bookshelf L Upper
+86,BSAL,604,Bookshelf A Lower
+87,BSBL,604,Bookshelf B Lower
+88,BSCL,604,Bookshelf C Lower
+89,BSDL,604,Bookshelf D Lower
+90,BSEL,605,Bookshelf E Lower
+91,BSFL,605,Bookshelf F Lower
+92,BSGL,605,Bookshelf G Lower
+93,BSHL,605,Bookshelf H Lower
+94,BSIL,605,Bookshelf I Lower
+95,BSJL,605,Bookshelf J Lower
+96,BSKL,605,Bookshelf K Lower
+97,BSLL,605,Bookshelf L Lower
