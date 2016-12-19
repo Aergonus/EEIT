@@ -13,17 +13,15 @@ nav.navbar.navbar-default.navbar-static-top
         li(class='#{nav.Home}')
           a(href='/') Home
       if user
-        ul.nav.navbar-nav.navbar-right
+        ul.nav.navbar-nav.navbar
           li(class='#{nav.Search}')
-            a(href='/search') Search for Parts
-        ul.nav.navbar-nav.navbar-right
-          li(class='#{nav.Request}')
-            a(href='/search') Make a Request
-        ul.nav.navbar-nav.navbar-right
-          li(class='#{nav.Kit}')
-            a(href='/search') Make a Kit
-        ul.nav.navbar-nav.navbar-right
             a(href='/search') Search
+        ul.nav.navbar-nav.navbar
+          li(class='#{nav.Request}')
+            a(href='/search') Requests
+        ul.nav.navbar-nav.navbar
+          li(class='#{nav.Kit}')
+            a(href='/search') Kits
         ul.nav.navbar-nav.navbar-right
           li(class='#{nav.Profile}')
             a(href='/profile') Edit Profile
