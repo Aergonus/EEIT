@@ -155,6 +155,8 @@ BEGIN
 INSERT INTO Users (`user`, `pass`, `utype`, `sid`, `fname`, `lname`, `phone`, `email`, `regtime`)
 	VALUES
 	(newuser, bcryptedhash, 'student', in_sid, in_fname, in_lname, in_phone, in_email, NOW());
+    
+SELECT `user`, `utype`, `fname`, `lname` FROM Users WHERE `user` = newuser;
 END;
 
 CREATE PROCEDURE Val(IN loginuser varchar(50))
