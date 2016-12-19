@@ -41,28 +41,3 @@ jspm_packages
 
 # Secrets
 config.js
-eeit_schema_gen.sql
-
-eeit_schema_gen.sql
-
-eeitPatch.sql
-
-JLab Inventory.xls
-
-JLab Inventory.xls
-
-eeit_schema_gen.sql
-
-testSQL.sql
-
-mysql_utils.js
-
-myLocations.csv
-
-myEquipmentTypes.csv
-
-myEquipment.csv
-
-JLab Inventory.xls
-
-eeit_schema_gen.sql
