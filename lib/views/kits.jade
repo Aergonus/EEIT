@@ -1,0 +1,23 @@
+extends ./layout.jade
+
+block vars
+  - var title = 'Search'
+
+block content
+  h1 Search for parts
+
+  if error
+    p ERROR: #{error}
+
+  form(method="post")
+    input(type="hidden", name="_csrf", value=csrfToken)
+    
+    span Part name:
+    input(type="text", name="partname", autofocus, placeholder="", required=false)
+    br
+
+    span Description:
+    input(type="text", name="description", autofocus, placeholder="", required=false)
+    br
+    
+    input(type="submit")
