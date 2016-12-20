@@ -19,18 +19,20 @@ block content
         table(border='1')
           thead
             tr
+              th
               th Equipment Type
               th Description
               th Quantity
+              th Select
             tbody
             for kitentry in kitentries
               tr
                 td
                   input(type="submit", class="btn btn-lg btn-primary btn-block", name=kitentry.etid, id=kitentry.etid, value="View Equipment Page")
 
-                for value, key in kit
+                for value, key in kitentry
                   // Do not list kitname, etid in table, only used to track selection
-                  if key != 'kitname' || key != 'etid'
+                  if key != 'kitname' && key != 'etid'
                     td=value
 
                 td
@@ -46,7 +48,7 @@ block content
   br
   br
 
-  a(href='/kits/catalog')
+  a(href='/kits/redircat')
     button(type="button", class="btn btn-lg btn-primary btn-block") Browse the Catalog
 
   a(href='/kits')

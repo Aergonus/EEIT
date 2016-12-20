@@ -1,10 +1,10 @@
 extends ./layout.jade
 
 block vars
-  - var title = 'Dashboard'
+  - var title = 'Search Results'
 
 block content
-  h1 Dashboard
+  h1 Search Results
 
   if catalog[0] != undefined
     p.
@@ -18,6 +18,8 @@ block content
           th Description
           th Datasheet
           th Item Number
+          th Status
+          th Last Status Update
         //-tr
           //-for val, key in catalog[0]
             //-th #{key}
